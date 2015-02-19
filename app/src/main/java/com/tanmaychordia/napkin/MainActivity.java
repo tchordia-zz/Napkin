@@ -19,7 +19,7 @@ public class MainActivity extends ActionBarActivity {
         if(currentUser==null) {
             navigateToLogin();
         }
-        System.out.println(currentUser.getEmail());
+
     }
 
     private void navigateToLogin() {
