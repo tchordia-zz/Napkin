@@ -5,5 +5,11 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_sign_up">SignUp</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="name_string">Name</string>
+    <string name="prompt_number">Phone Number</string>
+    <string name="prompt_organization">Organization</string>
+    <string name="prompt_title">Position</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
