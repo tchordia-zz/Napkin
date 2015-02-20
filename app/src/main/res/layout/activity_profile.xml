@@ -27,58 +27,99 @@
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:id="@+id/Company"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:orientation="vertical">
+                <ViewFlipper
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/viewFlipper" >
 
-                    <EditText
-                        android:layout_width="match_parent"
+                    <ScrollView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/profCompId"
-                        android:hint="Organization Name"
-                        android:layout_marginTop="10dp" />
+                        android:id="@+id/projectViewScreen" >
 
-                    <EditText
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"></LinearLayout>
+                    </ScrollView>
+
+                    <ScrollView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/profPositionId"
-                        android:layout_gravity="center_horizontal"
-                        android:hint="Position"
-                        android:layout_marginTop="10dp" />
+                        android:layout_height="match_parent"
+                        android:id="@+id/Project"
+                        android:layout_gravity="center_horizontal|top">
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress"
-                        android:ems="10"
-                        android:id="@+id/profCompEmailId"
-                        android:layout_gravity="center_horizontal"
-                        android:hint="Email"
-                        android:layout_marginTop="10dp" />
+                        <LinearLayout
+                            android:id="@+id/ProjectLinearLayout"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="vertical"
+                            android:weightSum="1"
+                            android:textAlignment="viewEnd"
+                            android:gravity="end">
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="phone"
-                        android:ems="10"
-                        android:id="@+id/profCompanyPhoneId"
-                        android:layout_gravity="center_horizontal"
-                        android:hint="Phone Number"
-                        android:layout_marginTop="10dp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:text="Add Project"
+                                android:id="@+id/textView2"
+                                android:layout_gravity="center_horizontal"
+                                android:textColor="#ff4a4a4a"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="10dp" />
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPostalAddress"
-                        android:ems="10"
-                        android:id="@+id/profAddressId"
-                        android:layout_gravity="center_horizontal"
-                        android:hint="Address"
-                        android:layout_marginTop="10dp" />
+                            <MultiAutoCompleteTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/multiAutoCompleteTextView"
+                                android:hint="Project Type (ex: Website)"
+                                android:layout_marginTop="10dp"
+                                android:layout_gravity="center_horizontal" />
 
-                </LinearLayout>
+                            <MultiAutoCompleteTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/multiAutoCompleteTextView2"
+                                android:hint="Language (ex: Python)"
+                                android:layout_marginTop="10dp"
+                                android:layout_gravity="center_horizontal" />
+
+                            <MultiAutoCompleteTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/profFindSkillsId"
+                                android:hint="Skills Needed"
+                                android:layout_marginTop="10dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:text="Difficulty"
+                                android:id="@+id/textView4"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="10dp" />
+
+                            <SeekBar
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/seekBar" />
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textMultiLine"
+                                android:ems="10"
+                                android:id="@+id/editText"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_weight="0.58"
+                                android:hint="Description"
+                                android:autoText="false" />
+
+                        </LinearLayout>
+                    </ScrollView>
+                </ViewFlipper>
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -96,7 +137,6 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:hint="Name"
-                        android:text="@string/name_string"
                         android:layout_marginTop="10dp" />
 
                     <EditText
@@ -120,23 +160,40 @@
                         android:layout_marginTop="10dp"
                         android:hint="@string/prompt_number" />
 
-                    <EditText
+                    <MultiAutoCompleteTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/profExpertiseId"
+                        android:id="@+id/profMeLanguageId"
                         android:layout_gravity="center_horizontal"
-                        android:hint="Expertise"
+                        android:hint="Languages (ex: Python)"
                         android:layout_marginTop="10dp" />
+
+                    <MultiAutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/profMeSkillsId"
+                        android:layout_gravity="center_horizontal"
+                        android:hint="Skills (ex: Backend)"
+                        android:layout_marginTop="10dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Skill Level"
+                        android:id="@+id/textView3"
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center_horizontal" />
+
+                    <SeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/seekBar2" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/Find"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:orientation="vertical"></LinearLayout>
-
             </FrameLayout>
+
         </LinearLayout>
     </TabHost>
 
