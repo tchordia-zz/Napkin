@@ -49,6 +49,9 @@ public class MainActivity extends ActionBarActivity {
             ParseUser.logOut();
             navigateToLogin();
         }
+        else if (id== R.id.profileButton){
+            startActivity(new Intent(this, ProfileActivity.class));
+        }
 
         return super.onOptionsItemSelected(item);
     }

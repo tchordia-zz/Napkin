@@ -30,23 +30,12 @@
                 <ViewFlipper
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/viewFlipper" >
-
-                    <ScrollView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/projectViewScreen" >
-
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"></LinearLayout>
-                    </ScrollView>
+                    android:id="@+id/Project" >
 
                     <ScrollView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/Project"
+                        android:id="@+id/New_Project"
                         android:layout_gravity="center_horizontal|top">
 
                         <LinearLayout
@@ -69,10 +58,17 @@
                                 android:layout_marginTop="20dp"
                                 android:layout_marginBottom="10dp" />
 
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/projectNameField"
+                                android:layout_gravity="center_horizontal"
+                                android:hint="Project Name" />
+
                             <MultiAutoCompleteTextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/multiAutoCompleteTextView"
+                                android:id="@+id/projectTypeField"
                                 android:hint="Project Type (ex: Website)"
                                 android:layout_marginTop="10dp"
                                 android:layout_gravity="center_horizontal" />
@@ -80,7 +76,7 @@
                             <MultiAutoCompleteTextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/multiAutoCompleteTextView2"
+                                android:id="@+id/projectLangField"
                                 android:hint="Language (ex: Python)"
                                 android:layout_marginTop="10dp"
                                 android:layout_gravity="center_horizontal" />
@@ -104,21 +100,35 @@
                             <SeekBar
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/seekBar" />
+                                android:id="@+id/difficultyProgress"
+                                android:max="@integer/sliderMaximum" />
 
                             <EditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="textMultiLine"
                                 android:ems="10"
-                                android:id="@+id/editText"
+                                android:id="@+id/projectDescriptionField"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_weight="0.58"
                                 android:hint="Description"
                                 android:autoText="false" />
 
+                            <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Create"
+                                android:id="@+id/newProjectSubmit"
+                                android:layout_marginTop="10dp" />
+
                         </LinearLayout>
                     </ScrollView>
+
+                    <ExpandableListView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/profProjectListId" />
+
                 </ViewFlipper>
 
                 <LinearLayout
