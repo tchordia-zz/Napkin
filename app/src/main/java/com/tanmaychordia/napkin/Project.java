@@ -105,4 +105,14 @@ public class Project extends ParseObject{
         put("AppType",s );
     }
 
+    public void setDescription(String d)
+    {
+        put("Description",d);
+        saveInBackground();
+    }
+    public String getDescription()
+    {
+        return (String)get("Description");
+    }
+
 }

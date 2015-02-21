@@ -2,6 +2,7 @@ package com.tanmaychordia.napkin;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -14,11 +15,18 @@ import android.widget.SeekBar;
 import android.widget.TabHost;
 import android.widget.ViewFlipper;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+
+import java.util.List;
+
 
 public class ProfileActivity extends ActionBarActivity {
 
     private ViewFlipper viewFlipper;
     private double lastX;
+    private ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +66,25 @@ public class ProfileActivity extends ActionBarActivity {
             }
         });
 
-        ListView listview = (ListView) findViewById(R.id.profProjectListId);
+        listView = (ListView) findViewById(R.id.profProjectListId);
+        ParseQuery<Project> query = new ParseQuery(Project.class);
+
+        query.findInBackground(new FindCallback<Project>() {
+            @Override
+            public void done(List<Project> scoreList, ParseException e) {
+                if (e == null) {
+
+                    ProfProjectAdapter adapter = new ProfProjectAdapter(ProfileActivity.this,scoreList);
+                    listView.setAdapter(adapter);
+                    Log.d("score", "Retrieved " + scoreList.size() + " scores");
+
+                } else {
+                    Log.d("score", "Error: " + e.getMessage());
+                }
+            }
+        });
+
+
 
     }
     @Override
