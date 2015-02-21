@@ -3,6 +3,7 @@ package com.tanmaychordia.napkin;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.util.Arrays;
@@ -15,13 +16,6 @@ import java.util.List;
 public class Project extends ParseObject{
     public Project(){
 
-        setName("");
-        setDifficulty(0);
-        put("Langs", Arrays.asList(new String[]{}));
-        put("Skills", Arrays.asList(new String[]{}));
-        setAppType("");
-        saveInBackground();
-
     }
     public Project(String name, int difficulty, String langs, String skills, String apptype, String d)
     {
@@ -33,16 +27,16 @@ public class Project extends ParseObject{
         setAppType(apptype);
         put("Description", d);
         System.out.println("in Constructor");
+        put("Owner", ParseUser.getCurrentUser().getUsername());
+
+        ParseUser.getCurrentUser().addUnique("projects", this);
         saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                if (e == null)
-                {
+                if (e == null) {
                     //ObjectSave
                     System.out.println("Saved");
-                }
-                else
-                {
+                } else {
                     System.out.println(e.getMessage());
                 }
             }
@@ -114,5 +108,6 @@ public class Project extends ParseObject{
     {
         return (String)get("Description");
     }
+
 
 }

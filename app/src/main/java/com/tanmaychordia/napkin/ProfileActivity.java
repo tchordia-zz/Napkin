@@ -18,6 +18,7 @@ import android.widget.ViewFlipper;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.List;
 
@@ -58,8 +59,16 @@ public class ProfileActivity extends ActionBarActivity {
                 int difficulty = ((SeekBar)findViewById(R.id.difficultyProgress)).getProgress();
                 String description = ((EditText)findViewById(R.id.projectDescriptionField)).getText().toString().trim();
 
-                Project project = new Project(name,difficulty,langs, skills, appType,description );
-
+                Project project = new Project(name,difficulty,langs, skills, appType, description );
+                final ProfProjectAdapter ad = (ProfProjectAdapter)listView.getAdapter();
+                ad.add(project);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ad.notifyDataSetChanged();
+                        leftToRight();
+                    }
+                });
 
 
 
@@ -68,6 +77,9 @@ public class ProfileActivity extends ActionBarActivity {
 
         listView = (ListView) findViewById(R.id.profProjectListId);
         ParseQuery<Project> query = new ParseQuery(Project.class);
+        query.whereEqualTo("Owner", ParseUser.getCurrentUser().getUsername());
+
+
 
         query.findInBackground(new FindCallback<Project>() {
             @Override
@@ -119,13 +131,9 @@ public class ProfileActivity extends ActionBarActivity {
                     // If no more View/Child to flip
                     if (viewFlipper.getDisplayedChild() == 0)
                         break;
+                    leftToRight();
 
-                    // set the required Animation type to ViewFlipper
-                    // The Next screen will come in form Left and current Screen will go OUT from Right
-                    viewFlipper.setInAnimation(this, R.anim.in_from_left);
-                    viewFlipper.setOutAnimation(this, R.anim.out_to_right);
-                    // Show the next Screen
-                    viewFlipper.showNext();
+
                 }
 
                 // if right to left swipe on screen
@@ -135,16 +143,31 @@ public class ProfileActivity extends ActionBarActivity {
                         break;
                     // set the required Animation type to ViewFlipper
                     // The Next screen will come in form Right and current Screen will go OUT from Left
-                    viewFlipper.setInAnimation(this, R.anim.in_from_right);
-                    viewFlipper.setOutAnimation(this, R.anim.out_to_left);
-                    // Show The Previous Screen
-                    viewFlipper.showPrevious();
+                    rightToLeft();
                 }
                 break;
             }
         }
 
     }
+
+    private void leftToRight() {
+        // set the required Animation type to ViewFlipper
+        // The Next screen will come in form Left and current Screen will go OUT from Right
+        viewFlipper.setInAnimation(this, R.anim.in_from_left);
+        viewFlipper.setOutAnimation(this, R.anim.out_to_right);
+        // Show the next Screen
+        viewFlipper.showNext();
+    }
+
+    private void rightToLeft() {
+        viewFlipper.setInAnimation(this, R.anim.in_from_right);
+        viewFlipper.setOutAnimation(this, R.anim.out_to_left);
+        // Show The Previous Screen
+        viewFlipper.showPrevious();
+    }
+
+
 
 
     @Override
