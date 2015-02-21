@@ -59,6 +59,13 @@ public class ProfileActivity extends ActionBarActivity {
                 int difficulty = ((SeekBar)findViewById(R.id.difficultyProgress)).getProgress();
                 String description = ((EditText)findViewById(R.id.projectDescriptionField)).getText().toString().trim();
 
+                ((EditText)findViewById(R.id.projectNameField)).setText("");
+                ((MultiAutoCompleteTextView)findViewById(R.id.projectTypeField)).setText("");
+                ((MultiAutoCompleteTextView)findViewById(R.id.profFindSkillsId)).setText("");
+               ((MultiAutoCompleteTextView)findViewById(R.id.projectLangField)).setText("");
+                ((SeekBar)findViewById(R.id.difficultyProgress)).setProgress(0);
+                ((EditText)findViewById(R.id.projectDescriptionField)).setText("");
+
                 Project project = new Project(name,difficulty,langs, skills, appType, description );
                 final ProfProjectAdapter ad = (ProfProjectAdapter)listView.getAdapter();
                 ad.add(project);
