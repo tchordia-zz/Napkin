@@ -1,7 +1,9 @@
 package com.tanmaychordia.napkin;
 
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.SaveCallback;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,25 +25,40 @@ public class Project extends ParseObject{
     }
     public Project(String name, int difficulty, String langs, String skills, String apptype, String d)
     {
+
         setName(name);
         setDifficulty(difficulty);
         addLang(langs);
         addSkills(skills);
         setAppType(apptype);
         put("Description", d);
-        saveInBackground();
+        System.out.println("in Constructor");
+        saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null)
+                {
+                    //ObjectSave
+                    System.out.println("Saved");
+                }
+                else
+                {
+                    System.out.println(e.getMessage());
+                }
+            }
+        });
 
 
     }
 
     public void setName(String name)
     {
-        put("Project Name", name);
+        put("ProjectName", name);
         saveInBackground();
     }
     public String getName()
     {
-        return (String)get("Project Name");
+        return (String)get("ProjectName");
     }
     public void setDifficulty(int difficulty)
     {
@@ -72,7 +89,7 @@ public class Project extends ParseObject{
     public void addSkills(String s)
     {
         List<String> sList = Arrays.asList(s.split(" "));
-        addUnique("Skills", sList);
+        addAllUnique("Skills", sList);
         saveInBackground();
     }
     public List<String> getSkills()

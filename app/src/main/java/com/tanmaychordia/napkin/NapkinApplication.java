@@ -11,6 +11,7 @@ import com.parse.ParseObject;
 public class NapkinApplication extends Application {
 @Override
 public void onCreate() {
+    Parse.enableLocalDatastore(this);
     ParseObject.registerSubclass(Project.class);
     Parse.initialize(this, "bpYNOCYCCaXlqWTv1gebMzd1HHP2gkiB2C3qG4yX", "jClGi10JOEsHzt5ImAi7sapXRUgNtGOi0UclCgyf");
 

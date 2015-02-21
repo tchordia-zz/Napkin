@@ -32,6 +32,11 @@
                     android:layout_height="match_parent"
                     android:id="@+id/Project" >
 
+                    <ExpandableListView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/profProjectListId" />
+
                     <ScrollView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -123,11 +128,6 @@
 
                         </LinearLayout>
                     </ScrollView>
-
-                    <ExpandableListView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/profProjectListId" />
 
                 </ViewFlipper>
 

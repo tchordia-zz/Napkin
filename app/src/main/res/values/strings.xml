@@ -11,5 +11,7 @@
     <string name="prompt_organization">Organization</string>
     <string name="prompt_title">Position</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="slide_duration">500</string>
+
 
 </resources>
