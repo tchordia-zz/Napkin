@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.parse.ParseException;
-import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 
@@ -36,7 +35,7 @@ public class SignUp extends ActionBarActivity {
                 String name = ((EditText)findViewById(R.id.nameView)).getText().toString().trim();
                 String phone = ((EditText)findViewById(R.id.phoneView)).getText().toString().trim();
 
-                ParseUser user = new ParseUser();
+                NUser user = new NUser();
                 user.setUsername(email);
                 user.setPassword(password);
                 user.setEmail(email);

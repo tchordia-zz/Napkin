@@ -7,12 +7,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.SeekBar;
 import android.widget.TabHost;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.parse.FindCallback;
@@ -83,6 +85,17 @@ public class ProfileActivity extends ActionBarActivity {
         });
 
         listView = (ListView) findViewById(R.id.profProjectListId);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Toast.makeText(getApplicationContext(),
+                        "Click ListItem Number " + position, Toast.LENGTH_LONG)
+                        .show();
+            }
+        });
+
+
         ParseQuery<Project> query = new ParseQuery(Project.class);
         query.whereEqualTo("Owner", ParseUser.getCurrentUser().getUsername());
 
