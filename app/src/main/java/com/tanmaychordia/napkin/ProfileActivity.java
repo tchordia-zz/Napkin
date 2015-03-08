@@ -30,6 +30,7 @@ public class ProfileActivity extends ActionBarActivity {
     private ViewFlipper viewFlipper;
     private double lastX;
     private ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -185,6 +186,11 @@ public class ProfileActivity extends ActionBarActivity {
         viewFlipper.setOutAnimation(this, R.anim.out_to_left);
         // Show The Previous Screen
         viewFlipper.showPrevious();
+    }
+
+    private void displayProject(Project project)
+    {
+
     }
 
 
