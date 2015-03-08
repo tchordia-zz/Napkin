@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.SeekBar;
 import android.widget.TabHost;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -48,6 +49,8 @@ public class ProfileActivity extends ActionBarActivity {
         spec.setContent(R.id.Me);
         spec.setIndicator("Me");
         tabs.addTab(spec);
+
+        
 
         viewFlipper = (ViewFlipper)findViewById(R.id.Project);
         Button b = (Button)findViewById(R.id.newProjectSubmit);
@@ -90,6 +93,10 @@ public class ProfileActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
+                Project p = ((Project)parent.getItemAtPosition(position));
+                if (p == null) System.out.println("oh no this is bad");
+                displayProject(p);
+
                 Toast.makeText(getApplicationContext(),
                         "Click ListItem Number " + position, Toast.LENGTH_LONG)
                         .show();
@@ -152,6 +159,7 @@ public class ProfileActivity extends ActionBarActivity {
                     // If no more View/Child to flip
                     if (viewFlipper.getDisplayedChild() == 0)
                         break;
+                    projectEditScreen();
                     leftToRight();
 
 
@@ -178,6 +186,7 @@ public class ProfileActivity extends ActionBarActivity {
         viewFlipper.setInAnimation(this, R.anim.in_from_left);
         viewFlipper.setOutAnimation(this, R.anim.out_to_right);
         // Show the next Screen
+
         viewFlipper.showNext();
     }
 
@@ -190,7 +199,35 @@ public class ProfileActivity extends ActionBarActivity {
 
     private void displayProject(Project project)
     {
+        ((TextView)findViewById(R.id.projectName)).setText("Edit Project");
 
+        ((EditText)findViewById(R.id.projectNameField)).setText(project.getName());
+        ((MultiAutoCompleteTextView)findViewById(R.id.projectTypeField)).setText(project.getAppType());
+        String ans = "";
+        for(String a: project.getLangs())
+            ans += a + " ";
+        ans = ans.trim();
+        ((MultiAutoCompleteTextView)findViewById(R.id.projectLangField)).setText(ans);
+        for(String a: project.getSkills())
+            ans += a + " ";
+        ans = ans.trim();
+        ((MultiAutoCompleteTextView)findViewById(R.id.profFindSkillsId)).setText(ans);
+        ((SeekBar)findViewById(R.id.difficultyProgress)).setProgress(project.getDifficulty());
+        ((Button)findViewById(R.id.newProjectSubmit)).setVisibility(View.INVISIBLE);
+        rightToLeft();
+
+    }
+    private void projectEditScreen()
+    {
+        ((TextView)findViewById(R.id.projectName)).setText("Edit Project");
+        ((EditText)findViewById(R.id.projectNameField)).setText("");
+        ((MultiAutoCompleteTextView)findViewById(R.id.projectTypeField)).setText("");
+
+        ((MultiAutoCompleteTextView)findViewById(R.id.projectLangField)).setText("");
+
+        ((MultiAutoCompleteTextView)findViewById(R.id.profFindSkillsId)).setText("");
+        ((SeekBar)findViewById(R.id.difficultyProgress)).setProgress(0);
+        ((Button)findViewById(R.id.newProjectSubmit)).setVisibility(View.VISIBLE);
     }
 
 
