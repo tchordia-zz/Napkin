@@ -19,7 +19,7 @@ public class MainActivity extends ActionBarActivity {
         if(currentUser==null) {
             navigateToLogin();
         }
-        System.out.println(currentUser.getEmail());
+
     }
 
     private void navigateToLogin() {
@@ -48,6 +48,9 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.logoutButton) {
             ParseUser.logOut();
             navigateToLogin();
+        }
+        else if (id== R.id.profileButton){
+            startActivity(new Intent(this, ProfileActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

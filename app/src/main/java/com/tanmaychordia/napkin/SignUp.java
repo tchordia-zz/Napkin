@@ -6,11 +6,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.parse.ParseException;
-import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 
@@ -21,7 +21,9 @@ public class SignUp extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_sign_up);
         mSignUp = (Button) findViewById(R.id.signupButton);
         mSignUp.setOnClickListener(new View.OnClickListener(){
@@ -33,18 +35,21 @@ public class SignUp extends ActionBarActivity {
                 String name = ((EditText)findViewById(R.id.nameView)).getText().toString().trim();
                 String phone = ((EditText)findViewById(R.id.phoneView)).getText().toString().trim();
 
-                ParseUser user = new ParseUser();
+                NUser user = new NUser();
                 user.setUsername(email);
                 user.setPassword(password);
                 user.setEmail(email);
 
-// other fields can be set just like with ParseObject
+
                 user.put("phone", phone);
                 user.put("name", name);
-
+                //create new User
+                setProgressBarIndeterminateVisibility(true);
                 user.signUpInBackground(new SignUpCallback() {
                     @Override
                     public void done(ParseException e) {
+                        setProgressBarIndeterminateVisibility(false);
+
                         if (e == null) {
                             System.out.println("YAY");
                             Intent intent = new Intent(SignUp.this, MainActivity.class);

@@ -42,9 +42,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
      * A dummy authentication store containing known user names and passwords.
      * TODO: remove after connecting to a real authentication system.
      */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
+
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -59,6 +57,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("CREATES");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -90,9 +90,13 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         });
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        System.out.println("IN LOGIN STREAM");
+
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println("IN LOGIN STREAM");
+
                 attemptLogin();
             }
         });
@@ -115,7 +119,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         if (mAuthTask != null) {
             return;
         }
-
+        System.out.println("IN LOGIN STREAM");
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
